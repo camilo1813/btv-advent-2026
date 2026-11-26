@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign up for updates on the Beyond the Vote Advent Challenge comic and its five rounds.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Beyond the Vote">
+  <meta property="og:title" content="Beyond the Vote · Advent Challenge 2026">
+  <meta property="og:description" content="One comic. Five rounds. Sign up for Advent Challenge updates, starting 29 November 2026.">
+  <meta property="og:url" content="https://camilo1813.github.io/btv-advent-2026/">
+  <meta property="og:image" content="https://camilo1813.github.io/btv-advent-2026/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Beyond the Vote Advent Challenge 2026. The launch is on 29 November.">
+  <title>Advent Challenge 2026 · Beyond the Vote</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./launch.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="./">Beyond the Vote</a>
+      <nav aria-label="Main navigation">
+        <a href="#comic">Comic</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#sign-up">Sign up</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="title">
+      <div class="wrap">
+        <h1 id="title">Advent<br>Challenge <span>2026</span></h1>
+        <p>Follow the comic, look closely at each scene, and return for five rounds of discovery. Launch day is <time datetime="2026-11-29">29 November 2026</time>.</p>
+        <div class="actions">
+          <a class="button" href="#sign-up">Sign up for updates</a>
+          <a class="button button-outline" href="#calendar">See the calendar</a>
+        </div>
+      </div>
+    </section>
+    <div class="wrap content">
+      <section id="sign-up" class="signup" aria-labelledby="signup-title">
+        <h2 id="signup-title">Get Advent updates</h2>
+        <p>Leave an email address for comic release and challenge updates. Competition entry opens separately.</p>
+        <p id="signup-unavailable">Online sign-up will be available when registration opens.</p>
+        <form id="signup-form" hidden aria-describedby="signup-privacy">
+          <label for="signup-email">Email address</label>
+          <div class="form-row">
+            <input id="signup-email" name="email" type="email" autocomplete="email" maxlength="254" pattern=".+@.+[.].+" title="Use a full email address, such as name@example.com" required>
+            <button class="button button-dark" type="submit">Sign up</button>
+          </div>
+          <p id="signup-privacy">Beyond the Vote will use this address for Advent Challenge updates. If you’re under 18, ask a parent or guardian to sign up with their own email address.</p>
+        </form>
+        <p id="signup-status" role="status"></p>
+        <a class="share" href="https://wa.me/?text=Join%20the%20Beyond%20the%20Vote%20Advent%20Challenge%202026%3A%20https%3A%2F%2Fcamilo1813.github.io%2Fbtv-advent-2026%2F%3Futm_source%3Dwhatsapp">Share on WhatsApp</a>
+      </section>
+      <section id="comic" class="comic" aria-labelledby="comic-title">
+        <h2 id="comic-title">The comic</h2>
+        <p>The opening episode will appear here when it’s released.</p>
+      </section>
+      <section id="calendar" aria-labelledby="calendar-title">
+        <div class="calendar-heading">
+          <h2 id="calendar-title">Round calendar</h2>
+          <p>Round dates and links will be posted here.</p>
+        </div>
+        <ol class="rounds">
+          <li id="round-1"><h3>Round 1</h3><p>Date to be announced</p></li>
+          <li id="round-2"><h3>Round 2</h3><p>Date to be announced</p></li>
+          <li id="round-3"><h3>Round 3</h3><p>Date to be announced</p></li>
+          <li id="round-4"><h3>Round 4</h3><p>Date to be announced</p></li>
+          <li id="round-5"><h3>Round 5</h3><p>Date to be announced</p></li>
+        </ol>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap footer">
+    <span>Beyond the Vote · Advent 2026</span>
+    <small>We count page opens and group them by campaign link. The view counter stores no email addresses or IP addresses.</small>
+  </footer>
+</body>
+</html>

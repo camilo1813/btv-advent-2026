@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Launch dashboard · Beyond the Vote</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script type="module" src="./monitor.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner"><a class="brand" href="../">Beyond the Vote</a></div>
+  </header>
+  <main class="wrap monitor">
+    <h1>Launch dashboard</h1>
+    <p id="monitor-setup">The dashboard is available after Supabase is connected.</p>
+    <form id="monitor-login" hidden>
+      <label>Email address <input name="email" type="email" autocomplete="username" required></label>
+      <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="button button-dark" type="submit">Sign in</button>
+    </form>
+    <p id="monitor-message" role="status"></p>
+    <section id="monitor-data" aria-labelledby="metrics-title" hidden>
+      <h2 id="metrics-title">Launch traffic</h2>
+      <p>Page opens include repeat visits. WhatsApp views are opens of the tagged campaign link. The dashboard refreshes every 15 seconds while it’s visible.</p>
+      <dl class="rounds">
+        <div><dt>Total views</dt><dd id="total-views"></dd></div>
+        <div><dt>WhatsApp views</dt><dd id="whatsapp-views"></dd></div>
+        <div><dt>Views in the last 15 minutes</dt><dd id="recent-views"></dd></div>
+        <div><dt>Sign-ups</dt><dd id="total-signups"></dd></div>
+      </dl>
+      <div class="monitor-actions">
+        <button class="button button-dark" id="refresh" type="button">Refresh</button>
+        <button class="button" id="sign-out" type="button">Sign out</button>
+        <span id="last-refresh"></span>
+      </div>
+      <table>
+        <caption>Views by hour in India time, starting with the current hour</caption>
+        <thead><tr><th scope="col">Hour</th><th scope="col">All opens</th><th scope="col">WhatsApp</th></tr></thead>
+        <tbody id="hourly-views"></tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

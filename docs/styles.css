@@ -1,0 +1,96 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #251e24;
+  background: #fbf8f3;
+  line-height: 1.55;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+a { color: inherit; text-underline-offset: .24em; }
+a:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+.wrap { width: min(70rem, calc(100% - 3rem)); margin-inline: auto; }
+.skip-link { position: absolute; z-index: 1; left: 1rem; top: 1rem; padding: .6rem 1rem; background: white; transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+
+.top { background: #261b29; color: #fff8ee; border-bottom: 1px solid #62475b; }
+.top-inner { display: flex; justify-content: space-between; align-items: center; gap: .5rem 1rem; flex-wrap: wrap; min-height: 4.25rem; padding-block: .6rem; }
+.brand { font-weight: 730; text-decoration: none; }
+nav { display: flex; gap: .65rem 1.25rem; flex-wrap: wrap; }
+
+.hero {
+  background: radial-gradient(ellipse at 84% 25%, #653748, transparent 64%), #261b29;
+  color: #fff8ee;
+  border-bottom: .3rem solid #d2a165;
+  padding-block: clamp(3rem, 8vw, 7rem);
+}
+h1, h2 { font-family: Georgia, serif; font-weight: 400; line-height: 1.05; margin: 0; }
+h1 { font-size: clamp(2.8rem, 9vw, 7.5rem); letter-spacing: -.055em; }
+h1 span { color: #ffcb8e; }
+.hero p { color: #f0dee5; max-width: 33rem; margin: 1.5rem 0; font-size: clamp(1rem, 2vw, 1.25rem); }
+.actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: .55rem 1rem;
+  border: 1px solid #ffcb8e;
+  background: #ffcb8e;
+  color: #261b29;
+  text-decoration: none;
+  font-weight: 650;
+}
+.button-outline { background: transparent; color: #fff8ee; }
+.hero .button:focus-visible { outline-color: #fff8ee; }
+.button:hover { text-decoration: underline; }
+.button-dark { color: #fff8ee; background: #4c2739; border-color: #4c2739; }
+button { font: inherit; cursor: pointer; }
+button:disabled { opacity: .65; cursor: wait; }
+
+.content { display: grid; gap: clamp(2.5rem, 6vw, 5rem); padding-block: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -.035em; }
+.comic, .signup { background: #f0e8e5; border-inline-start: .25rem solid #723e57; padding: clamp(1.25rem, 4vw, 2.5rem); }
+.comic p, .calendar-heading p { margin: .75rem 0 0; }
+.comic img { display: block; max-width: 100%; height: auto; }
+.rounds { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .75rem; }
+.rounds > * { border: 1px solid #d5c8ce; padding: 1rem; }
+.rounds h3 { margin: 0; font-size: 1.1rem; }
+.rounds p { margin: .35rem 0 0; color: #584651; }
+.footer { padding-block: 1.25rem 2rem; border-top: 1px solid #d5c8ce; color: #584651; }
+.footer small { display: block; margin-top: .4rem; }
+.signup label, .monitor label { display: block; font-weight: 650; }
+.form-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .35rem; }
+input {
+  width: min(100%, 22rem);
+  min-height: 2.75rem;
+  border: 1px solid #725e6b;
+  padding: .55rem .75rem;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+input:focus-visible, button:focus-visible { outline: 3px solid #723e57; outline-offset: 3px; }
+#signup-privacy { max-width: 44rem; font-size: .9rem; }
+#signup-status:empty { display: none; }
+#signup-status { font-weight: 650; }
+.share { display: inline-block; font-weight: 650; margin-top: .5rem; }
+
+.monitor { padding-block: 2rem 4rem; }
+.monitor h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); }
+.monitor form { display: grid; gap: .9rem; justify-items: start; }
+.monitor label { width: min(100%, 22rem); }
+.monitor input { margin-top: .3rem; }
+.monitor .rounds { margin-bottom: 2rem; }
+.monitor dt { font-weight: 650; }
+.monitor dd { margin: .15rem 0 0; font-size: 1.75rem; line-height: 1.2; }
+.monitor-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.monitor table { width: min(100%, 36rem); border-collapse: collapse; text-align: left; }
+.monitor th, .monitor td { padding: .5rem; border-bottom: 1px solid #d5c8ce; }
+.monitor tbody :is(th, td) { font-weight: 400; }
+.monitor caption { text-align: left; padding-bottom: .5rem; }
+
+@media (max-width: 35rem) {
+  .wrap { width: calc(100% - 2rem); }
+}
