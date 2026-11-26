@@ -93,6 +93,11 @@ input:focus-visible, button:focus-visible { outline: 3px solid #723e57; outline-
 .monitor-section { margin-block: 2rem; }
 .monitor-section h3, .monitor-section summary { font-size: 1.25rem; font-weight: 700; }
 .monitor-section summary { cursor: pointer; margin-bottom: .75rem; }
+.view-table { overflow-x: auto; }
+.view-table:focus-visible { outline: 2px solid #723e57; outline-offset: 2px; }
+.view-table table { width: 100%; }
+.view-table th, .view-table td { white-space: nowrap; }
+.view-table td:last-child { font-family: ui-monospace, monospace; }
 #monitor-data .view-filter { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; }
 .view-filter label { width: auto; max-width: 100%; }
 .view-filter select {

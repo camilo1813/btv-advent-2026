@@ -29,6 +29,7 @@ const preciseDate = new Intl.DateTimeFormat("en-IN", {
   hourCycle: "h23",
   timeZone: "Asia/Kolkata",
 });
+const countries = new Intl.DisplayNames(["en-IN"], { type: "region", fallback: "none" });
 
 let session = null;
 let refreshing = false;
@@ -125,12 +126,17 @@ function renderTimeline(log) {
     time.textContent = `${preciseDate.format(new Date(event.opened_at))}.${fractional.padEnd(6, "0")}`;
     row.insertCell().append(time);
     row.insertCell().textContent = event.source === "whatsapp" ? "WhatsApp link" : "Other";
+    row.insertCell().textContent = event.country_code
+      ? countries.of(event.country_code) ?? event.country_code
+      : "Unavailable";
+    row.insertCell().textContent = event.device_type ?? "Unavailable";
+    row.insertCell().textContent = event.masked_ip ?? "Unavailable";
     return row;
   });
   if (!rows.length) {
     const row = document.createElement("tr");
     const cell = row.insertCell();
-    cell.colSpan = 2;
+    cell.colSpan = 5;
     cell.textContent = "No views in this time range.";
     rows.push(row);
   }
