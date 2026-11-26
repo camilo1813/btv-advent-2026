@@ -6,16 +6,36 @@ const panel = document.querySelector("#monitor-data");
 const message = document.querySelector("#monitor-message");
 const refreshButton = document.querySelector("#refresh");
 const hours = document.querySelector("#hourly-views");
+const minutes = document.querySelector("#minute-views");
 const lastRefresh = document.querySelector("#last-refresh");
+const filterForm = document.querySelector("#view-filter");
+const applyFilter = filterForm.querySelector("button");
+const range = document.querySelector("#view-range");
+const customRange = document.querySelector("#view-custom-range");
+const startInput = document.querySelector("#view-start");
+const endInput = document.querySelector("#view-end");
+const filterMessage = document.querySelector("#view-filter-message");
+const newer = document.querySelector("#newer-views");
+const older = document.querySelector("#older-views");
 const number = new Intl.NumberFormat("en-IN");
 const date = new Intl.DateTimeFormat("en-IN", {
   dateStyle: "medium",
   timeStyle: "short",
   timeZone: "Asia/Kolkata",
 });
+const preciseDate = new Intl.DateTimeFormat("en-IN", {
+  dateStyle: "medium",
+  timeStyle: "medium",
+  hourCycle: "h23",
+  timeZone: "Asia/Kolkata",
+});
 
 let session = null;
 let refreshing = false;
+let timeline = null;
+let filter = { recent_minutes: 60, range_start: null, range_end: null };
+let frozenRange = null;
+const cursors = [];
 
 function clearSession() {
   const previous = session;
@@ -23,21 +43,47 @@ function clearSession() {
   panel.hidden = true;
   form.hidden = false;
   form.reset();
+  filterForm.reset();
+  customRange.hidden = true;
+  startInput.required = false;
+  endInput.required = false;
+  filterMessage.textContent = "";
+  panel.querySelectorAll("tbody, .rounds dd, #view-window, #last-refresh").forEach((element) => {
+    element.replaceChildren();
+  });
+  filter = { recent_minutes: 60, range_start: null, range_end: null };
+  frozenRange = null;
+  cursors.length = 0;
+  timeline = null;
   if (previous) {
     void request("/auth/v1/logout?scope=local", {}, previous.access_token).catch(() => {});
   }
 }
 
-async function getMetrics(activeSession) {
+async function getData(activeSession) {
+  const cursor = cursors.at(-1);
+  const timelineParameters = {
+    ...filter,
+    ...frozenRange,
+    before_time: cursor?.opened_at ?? null,
+    before_id: cursor?.id ?? null,
+  };
+  async function load() {
+    return Promise.all([
+      rpc("btv_launch_metrics", {}, activeSession.access_token),
+      rpc("btv_launch_timeline", timelineParameters, activeSession.access_token),
+    ]);
+  }
+
   try {
-    return await rpc("btv_launch_metrics", {}, activeSession.access_token);
+    return await load();
   } catch (error) {
     if (error.status !== 401 || !activeSession.refresh_token) throw error;
     const renewed = await request("/auth/v1/token?grant_type=refresh_token", {
       refresh_token: activeSession.refresh_token,
     });
     Object.assign(activeSession, renewed);
-    return rpc("btv_launch_metrics", {}, activeSession.access_token);
+    return load();
   }
 }
 
@@ -51,29 +97,67 @@ function renderMetrics(metrics) {
     document.getElementById(id).textContent = number.format(value);
   }
 
-  const rows = metrics.hours.map((hour) => {
+  renderBuckets(hours, metrics.hours);
+  lastRefresh.textContent = `Last updated ${preciseDate.format(new Date(metrics.updated_at))} IST`;
+}
+
+function renderBuckets(table, buckets) {
+  const rows = buckets.map((bucket) => {
     const row = document.createElement("tr");
     const heading = document.createElement("th");
     heading.scope = "row";
-    heading.textContent = date.format(new Date(hour.start));
+    heading.textContent = date.format(new Date(bucket.start));
     row.append(heading);
-    row.insertCell().textContent = number.format(hour.views);
-    row.insertCell().textContent = number.format(hour.whatsapp_views);
+    row.insertCell().textContent = number.format(bucket.views);
+    row.insertCell().textContent = number.format(bucket.whatsapp_views);
     return row;
   });
-  hours.replaceChildren(...rows);
-  lastRefresh.textContent = `Last updated ${date.format(new Date(metrics.updated_at))} IST`;
+  table.replaceChildren(...rows);
+}
+
+function renderTimeline(log) {
+  renderBuckets(minutes, log.minutes);
+  const rows = log.events.map((event) => {
+    const row = document.createElement("tr");
+    const time = document.createElement("time");
+    const fractional = event.opened_at.match(/\.(\d+)/)?.[1] ?? "";
+    time.dateTime = event.opened_at;
+    time.textContent = `${preciseDate.format(new Date(event.opened_at))}.${fractional.padEnd(6, "0")}`;
+    row.insertCell().append(time);
+    row.insertCell().textContent = event.source === "whatsapp" ? "WhatsApp link" : "Other";
+    return row;
+  });
+  if (!rows.length) {
+    const row = document.createElement("tr");
+    const cell = row.insertCell();
+    cell.colSpan = 2;
+    cell.textContent = "No views in this time range.";
+    rows.push(row);
+  }
+  document.querySelector("#view-events").replaceChildren(...rows);
+  const from = preciseDate.format(new Date(log.window_start));
+  const until = preciseDate.format(new Date(log.window_end));
+  document.querySelector("#view-window").textContent = `${from} to ${until} IST · Page ${cursors.length + 1}`;
+}
+
+function setBusy(busy) {
+  refreshButton.disabled = busy;
+  applyFilter.disabled = busy;
+  newer.disabled = busy || cursors.length === 0;
+  older.disabled = busy || !timeline?.has_more;
 }
 
 async function refresh() {
   if (!session || refreshing) return;
   refreshing = true;
-  refreshButton.disabled = true;
+  setBusy(true);
   const activeSession = session;
   try {
-    const metrics = await getMetrics(activeSession);
+    const [metrics, log] = await getData(activeSession);
     if (session !== activeSession) return;
     renderMetrics(metrics);
+    renderTimeline(log);
+    timeline = log;
     form.hidden = true;
     panel.hidden = false;
     message.textContent = "";
@@ -87,7 +171,7 @@ async function refresh() {
     }
   } finally {
     refreshing = false;
-    refreshButton.disabled = false;
+    setBusy(false);
   }
 }
 
@@ -115,6 +199,49 @@ if (configured) {
   });
 
   refreshButton.addEventListener("click", refresh);
+  range.addEventListener("change", () => {
+    const custom = range.value === "custom";
+    customRange.hidden = !custom;
+    startInput.required = custom;
+    endInput.required = custom;
+  });
+  filterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (refreshing) return;
+    filterMessage.textContent = "";
+    let rangeStart = null;
+    let rangeEnd = null;
+    if (range.value === "custom") {
+      const start = new Date(`${startInput.value}+05:30`);
+      const end = new Date(`${endInput.value}+05:30`);
+      const duration = end - start;
+      if (!(duration > 0 && duration <= 31 * 24 * 60 * 60 * 1_000)) {
+        filterMessage.textContent = "Choose an end time after the start, within 31 days.";
+        return;
+      }
+      rangeStart = start.toISOString();
+      rangeEnd = end.toISOString();
+    }
+    filter = { recent_minutes: Number(range.value) || 60, range_start: rangeStart, range_end: rangeEnd };
+    timeline = null;
+    frozenRange = null;
+    cursors.length = 0;
+    void refresh();
+  });
+  older.addEventListener("click", () => {
+    if (refreshing || !timeline?.has_more) return;
+    frozenRange = { range_start: timeline.window_start, range_end: timeline.window_end };
+    cursors.push(timeline.events.at(-1));
+    timeline = null;
+    void refresh();
+  });
+  newer.addEventListener("click", () => {
+    if (refreshing || !cursors.length) return;
+    cursors.pop();
+    if (!cursors.length) frozenRange = null;
+    timeline = null;
+    void refresh();
+  });
   document.querySelector("#sign-out").addEventListener("click", () => {
     clearSession();
     message.textContent = "Signed out.";
@@ -123,5 +250,5 @@ if (configured) {
     if (document.visibilityState === "visible") void refresh();
   }
   document.addEventListener("visibilitychange", refreshWhenVisible);
-  setInterval(refreshWhenVisible, 15_000);
+  setInterval(refreshWhenVisible, 60_000);
 }

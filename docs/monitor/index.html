@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Launch dashboard · Beyond the Vote</title>
   <link rel="stylesheet" href="../styles.css">
-  <script type="module" src="./monitor.js"></script>
+  <script type="module" src="./monitor.js?v=2"></script>
 </head>
 <body>
   <header class="top">
@@ -23,7 +23,7 @@
     <p id="monitor-message" role="status"></p>
     <section id="monitor-data" aria-labelledby="metrics-title" hidden>
       <h2 id="metrics-title">Launch traffic</h2>
-      <p>Page opens include repeat visits. WhatsApp views are opens of the tagged campaign link. The dashboard refreshes every 15 seconds while it’s visible.</p>
+      <p>Page opens include repeat visits. WhatsApp views are opens of the tagged campaign link. The dashboard refreshes every minute while it’s visible. All times are India Standard Time (IST).</p>
       <dl class="rounds">
         <div><dt>Total views</dt><dd id="total-views"></dd></div>
         <div><dt>WhatsApp views</dt><dd id="whatsapp-views"></dd></div>
@@ -35,11 +35,51 @@
         <button class="button" id="sign-out" type="button">Sign out</button>
         <span id="last-refresh"></span>
       </div>
-      <table>
-        <caption>Views by hour in India time, starting with the current hour</caption>
-        <thead><tr><th scope="col">Hour</th><th scope="col">All opens</th><th scope="col">WhatsApp</th></tr></thead>
-        <tbody id="hourly-views"></tbody>
-      </table>
+      <section class="monitor-section" aria-labelledby="view-log-title">
+        <h3 id="view-log-title">Individual views</h3>
+        <form id="view-filter" class="view-filter">
+          <label for="view-range">Time range
+            <select id="view-range">
+              <option value="15">Last 15 minutes</option>
+              <option value="60" selected>Last hour</option>
+              <option value="1440">Last 24 hours</option>
+              <option value="custom">Custom range</option>
+            </select>
+          </label>
+          <div id="view-custom-range" class="form-row" hidden>
+            <label>From (IST)<input id="view-start" type="datetime-local" step="1"></label>
+            <label>Until (IST)<input id="view-end" type="datetime-local" step="1"></label>
+          </div>
+          <button class="button button-dark" type="submit">Apply range</button>
+        </form>
+        <p id="view-filter-message" role="status"></p>
+        <p id="view-window"></p>
+        <table>
+          <caption>Recorded page opens, newest first</caption>
+          <thead><tr><th scope="col">Recorded time (IST)</th><th scope="col">Source</th></tr></thead>
+          <tbody id="view-events"></tbody>
+        </table>
+        <div class="monitor-actions">
+          <button class="button" id="newer-views" type="button" disabled>Newer views</button>
+          <button class="button" id="older-views" type="button" disabled>Older views</button>
+        </div>
+      </section>
+      <details class="monitor-section" open>
+        <summary>Minute-by-minute traffic</summary>
+        <table>
+          <caption>Current minute and previous 59 minutes</caption>
+          <thead><tr><th scope="col">Minute (IST)</th><th scope="col">All opens</th><th scope="col">WhatsApp</th></tr></thead>
+          <tbody id="minute-views"></tbody>
+        </table>
+      </details>
+      <details class="monitor-section">
+        <summary>Hourly traffic</summary>
+        <table>
+          <caption>Current hour and previous 23 hours</caption>
+          <thead><tr><th scope="col">Hour (IST)</th><th scope="col">All opens</th><th scope="col">WhatsApp</th></tr></thead>
+          <tbody id="hourly-views"></tbody>
+        </table>
+      </details>
     </section>
   </main>
 </body>
