@@ -17,6 +17,8 @@ const endInput = document.querySelector("#view-end");
 const filterMessage = document.querySelector("#view-filter-message");
 const newer = document.querySelector("#newer-views");
 const older = document.querySelector("#older-views");
+const repeatPopup = document.querySelector("#repeat-popup");
+const repeatStatus = document.querySelector("#repeat-status");
 const number = new Intl.NumberFormat("en-IN");
 const date = new Intl.DateTimeFormat("en-IN", {
   dateStyle: "medium",
@@ -37,6 +39,8 @@ let timeline = null;
 let filter = { recent_minutes: 60, range_start: null, range_end: null };
 let frozenRange = null;
 const cursors = [];
+const alerted = new Map();
+let alertsAfter = null;
 
 function clearSession() {
   const previous = session;
@@ -56,6 +60,10 @@ function clearSession() {
   frozenRange = null;
   cursors.length = 0;
   timeline = null;
+  alerted.clear();
+  alertsAfter = null;
+  repeatPopup.hidden = true;
+  repeatStatus.textContent = "";
   if (previous) {
     void request("/auth/v1/logout?scope=local", {}, previous.access_token).catch(() => {});
   }
@@ -73,6 +81,7 @@ async function getData(activeSession) {
     return Promise.all([
       rpc("btv_launch_metrics", {}, activeSession.access_token),
       rpc("btv_launch_timeline", timelineParameters, activeSession.access_token),
+      rpc("btv_live_visitors", { alerts_after: alertsAfter }, activeSession.access_token),
     ]);
   }
 
@@ -146,6 +155,56 @@ function renderTimeline(log) {
   document.querySelector("#view-window").textContent = `${from} to ${until} IST · Page ${cursors.length + 1}`;
 }
 
+function renderVisitors(visitors) {
+  const rows = visitors.ips.map((ip) => {
+    const row = document.createElement("tr");
+    const connection = document.createElement("th");
+    connection.scope = "row";
+    connection.textContent = `IP #${ip.id}`;
+    row.append(connection);
+    for (const value of [
+      ip.masked_ip,
+      [ip.city, ip.region].filter(Boolean).join(", ") || "Unavailable",
+      ip.country_code ? countries.of(ip.country_code) ?? ip.country_code : "Unavailable",
+      ip.devices.join(", ") || "Unavailable",
+      number.format(ip.visit_count),
+      preciseDate.format(new Date(ip.first_seen)),
+      preciseDate.format(new Date(ip.last_seen)),
+    ]) {
+      row.insertCell().textContent = value;
+    }
+    if (ip.visit_count > 1) {
+      row.className = "repeat-connection";
+      connection.textContent += " · Repeat IP";
+    }
+    return row;
+  });
+  if (!rows.length) {
+    const row = document.createElement("tr");
+    const cell = row.insertCell();
+    cell.colSpan = 8;
+    cell.textContent = "No IP addresses recorded yet.";
+    rows.push(row);
+  }
+  document.querySelector("#distinct-ips").replaceChildren(...rows);
+
+  const newAlerts = visitors.alerts.filter((event) => !alerted.has(event.id));
+  for (const event of newAlerts) alerted.set(event.id, Date.parse(event.opened_at));
+  for (const [id, time] of alerted) {
+    if (time < Date.parse(visitors.as_of) - 60_000) alerted.delete(id);
+  }
+  alertsAfter = visitors.as_of;
+  if (newAlerts.length) {
+    const browsers = newAlerts.filter((event) => event.repeat_browser).length;
+    const ipOnly = newAlerts.length - browsers;
+    const labels = [];
+    if (browsers) labels.push(`${number.format(browsers)} returning-browser ${browsers === 1 ? "view" : "views"}`);
+    if (ipOnly) labels.push(`${number.format(ipOnly)} repeat-IP ${ipOnly === 1 ? "view" : "views"}`);
+    repeatPopup.hidden = false;
+    repeatStatus.textContent = labels.join(" · ");
+  }
+}
+
 function setBusy(busy) {
   refreshButton.disabled = busy;
   applyFilter.disabled = busy;
@@ -159,10 +218,11 @@ async function refresh() {
   setBusy(true);
   const activeSession = session;
   try {
-    const [metrics, log] = await getData(activeSession);
+    const [metrics, log, visitors] = await getData(activeSession);
     if (session !== activeSession) return;
     renderMetrics(metrics);
     renderTimeline(log);
+    renderVisitors(visitors);
     timeline = log;
     form.hidden = true;
     panel.hidden = false;
@@ -205,6 +265,10 @@ if (configured) {
   });
 
   refreshButton.addEventListener("click", refresh);
+  document.querySelector("#dismiss-repeat").addEventListener("click", () => {
+    repeatPopup.hidden = true;
+    repeatStatus.textContent = "";
+  });
   range.addEventListener("change", () => {
     const custom = range.value === "custom";
     customRange.hidden = !custom;

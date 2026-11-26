@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Launch dashboard · Beyond the Vote</title>
-  <link rel="stylesheet" href="../styles.css?v=3">
-  <script type="module" src="./monitor.js?v=3"></script>
+  <link rel="stylesheet" href="../styles.css?v=4">
+  <script type="module" src="./monitor.js?v=4"></script>
 </head>
 <body>
   <header class="top">
@@ -35,6 +35,22 @@
         <button class="button" id="sign-out" type="button">Sign out</button>
         <span id="last-refresh"></span>
       </div>
+      <aside id="repeat-popup" class="repeat-popup" hidden aria-label="Repeat visit notification">
+        <p id="repeat-status" role="status"></p>
+        <button type="button" id="dismiss-repeat">Dismiss</button>
+      </aside>
+      <section class="monitor-section" aria-labelledby="distinct-ips-title">
+        <h3 id="distinct-ips-title">Newest IP addresses</h3>
+        <p>One row per distinct IP, newest first. A repeat IP can be a shared connection. A returning browser is a separate signal.</p>
+        <div class="view-table ip-table" tabindex="0" role="region" aria-label="Newest IP addresses">
+          <table>
+            <caption>Latest 100 distinct addresses since repeat tracking began. City and state estimates are available for matched Indian IP ranges.</caption>
+            <thead><tr><th scope="col">Connection</th><th scope="col">Masked IP</th><th scope="col">City / state</th><th scope="col">Country</th><th scope="col">Devices</th><th scope="col">Views</th><th scope="col">First seen (IST)</th><th scope="col">Last seen (IST)</th></tr></thead>
+            <tbody id="distinct-ips"></tbody>
+          </table>
+        </div>
+        <p><a href="https://db-ip.com">IP Geolocation by DB-IP</a></p>
+      </section>
       <section class="monitor-section" aria-labelledby="view-log-title">
         <h3 id="view-log-title">Individual views</h3>
         <form id="view-filter" class="view-filter">

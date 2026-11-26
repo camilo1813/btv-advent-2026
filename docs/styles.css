@@ -98,6 +98,25 @@ input:focus-visible, button:focus-visible { outline: 3px solid #723e57; outline-
 .view-table table { width: 100%; }
 .view-table th, .view-table td { white-space: nowrap; }
 .view-table td:last-child { font-family: ui-monospace, monospace; }
+.ip-table td:last-child { font-family: inherit; }
+.ip-table td:nth-child(2) { font-family: ui-monospace, monospace; }
+.repeat-connection { background: #fff0d9; }
+.repeat-popup {
+  position: fixed;
+  z-index: 2;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  max-width: min(26rem, calc(100vw - 2rem));
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem;
+  background: #fff0d9;
+  border: 1px solid #81512d;
+  box-shadow: 0 .2rem 1rem #261b2940;
+}
+.repeat-popup p { margin: 0; }
+.repeat-popup button { padding: .35rem .65rem; color: inherit; background: transparent; border: 1px solid #81512d; }
 #monitor-data .view-filter { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; }
 .view-filter label { width: auto; max-width: 100%; }
 .view-filter select {

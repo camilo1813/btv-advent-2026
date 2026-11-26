@@ -4,16 +4,29 @@ const source = new URLSearchParams(location.search).get("utm_source")?.toLowerCa
   ? "whatsapp"
   : "other";
 
+function browserToken() {
+  try {
+    const key = "btv-advent-browser";
+    const saved = localStorage.getItem(key);
+    if (saved && /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(saved)) return saved;
+    const token = crypto.randomUUID();
+    localStorage.setItem(key, token);
+    return token;
+  } catch {
+    return null;
+  }
+}
+
 async function countView() {
   if (document.visibilityState !== "visible" || !globalThis.crypto?.randomUUID) return;
   document.removeEventListener("visibilitychange", countView);
-  const args = { view_id: crypto.randomUUID(), campaign_source: source };
+  const args = { view_id: crypto.randomUUID(), campaign_source: source, browser_token: browserToken() };
   try {
-    await rpc("btv_record_view", args);
+    await rpc("btv_record_browser_view", args);
   } catch {
     // A lost response may have arrived after the insert. Reuse its ID on retry.
     if (document.visibilityState === "visible") {
-      await rpc("btv_record_view", args).catch(() => {});
+      await rpc("btv_record_browser_view", args).catch(() => {});
     }
   }
 }
