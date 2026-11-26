@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Launch dashboard · Beyond the Vote</title>
-  <link rel="stylesheet" href="../styles.css?v=4">
-  <script type="module" src="./monitor.js?v=4"></script>
+  <link rel="stylesheet" href="../styles.css?v=5">
+  <script type="module" src="./monitor.js?v=5"></script>
 </head>
 <body>
   <header class="top">
@@ -70,10 +70,26 @@
         </form>
         <p id="view-filter-message" role="status"></p>
         <p id="view-window"></p>
+        <div class="engagement-summary">
+          <h4>Page activity in this time range</h4>
+          <dl class="rounds">
+            <div><dt>Views with activity data</dt><dd id="tracked-views"></dd></div>
+            <div><dt>Recorded clicks</dt><dd id="activity-clicks"></dd></div>
+            <div><dt>Average visible time</dt><dd id="activity-duration"></dd></div>
+            <div><dt>Average scroll depth</dt><dd id="activity-scroll"></dd></div>
+          </dl>
+          <details>
+            <summary>Clicks by link, button, or section</summary>
+            <table>
+              <thead><tr><th scope="col">Target</th><th scope="col">Clicks</th></tr></thead>
+              <tbody id="click-targets"></tbody>
+            </table>
+          </details>
+        </div>
         <div class="view-table" tabindex="0" role="region" aria-label="Recorded page opens">
           <table>
             <caption>Newest first. Location is approximate. Older views may lack visitor details.</caption>
-            <thead><tr><th scope="col">Recorded time (IST)</th><th scope="col">Source</th><th scope="col">Country</th><th scope="col">Device</th><th scope="col">Masked IP</th></tr></thead>
+            <thead><tr><th scope="col">Recorded time (IST)</th><th scope="col">Source</th><th scope="col">Country</th><th scope="col">Device</th><th scope="col">Masked IP</th><th scope="col">Activity</th></tr></thead>
             <tbody id="view-events"></tbody>
           </table>
         </div>
@@ -98,6 +114,15 @@
           <tbody id="hourly-views"></tbody>
         </table>
       </details>
+      <dialog id="view-activity" aria-labelledby="activity-title">
+        <h3 id="activity-title">Visit activity</h3>
+        <p id="activity-view-time"></p>
+        <p id="activity-detail-status" role="status"></p>
+        <ol id="activity-event-list"></ol>
+        <form method="dialog">
+          <button class="button button-dark">Close</button>
+        </form>
+      </dialog>
     </section>
   </main>
 </body>

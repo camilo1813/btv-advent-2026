@@ -1,4 +1,4 @@
-import { configured, request, rpc } from "../supabase.js";
+import { configured, request, rpc } from "../supabase.js?v=5";
 
 const form = document.querySelector("#monitor-login");
 const submit = form.querySelector("button");
@@ -19,6 +19,9 @@ const newer = document.querySelector("#newer-views");
 const older = document.querySelector("#older-views");
 const repeatPopup = document.querySelector("#repeat-popup");
 const repeatStatus = document.querySelector("#repeat-status");
+const activityDialog = document.querySelector("#view-activity");
+const activityStatus = document.querySelector("#activity-detail-status");
+const activityEvents = document.querySelector("#activity-event-list");
 const number = new Intl.NumberFormat("en-IN");
 const date = new Intl.DateTimeFormat("en-IN", {
   dateStyle: "medium",
@@ -32,6 +35,16 @@ const preciseDate = new Intl.DateTimeFormat("en-IN", {
   timeZone: "Asia/Kolkata",
 });
 const countries = new Intl.DisplayNames(["en-IN"], { type: "region", fallback: "none" });
+const actionLabels = {
+  skip_content: "Skip to content", brand_home: "Beyond the Vote home link",
+  nav_comic: "Comic navigation", nav_calendar: "Calendar navigation", nav_signup: "Sign-up navigation",
+  hero_signup: "Sign up for updates", hero_calendar: "See the calendar", submit_signup: "Sign-up button",
+  share_whatsapp: "Share on WhatsApp", control_other: "Other link or button",
+  page_intro: "Introduction section", page_signup: "Sign-up section", page_comic: "Comic section",
+  page_calendar: "Calendar section", page_footer: "Footer", page_other: "Other page area",
+  scroll_25: "Reached 25% scroll depth", scroll_50: "Reached 50% scroll depth",
+  scroll_75: "Reached 75% scroll depth", scroll_100: "Reached the bottom",
+};
 
 let session = null;
 let refreshing = false;
@@ -41,6 +54,7 @@ let frozenRange = null;
 const cursors = [];
 const alerted = new Map();
 let alertsAfter = null;
+let activityRequest = 0;
 
 function clearSession() {
   const previous = session;
@@ -64,6 +78,10 @@ function clearSession() {
   alertsAfter = null;
   repeatPopup.hidden = true;
   repeatStatus.textContent = "";
+  if (activityDialog.open) activityDialog.close();
+  document.querySelector("#activity-view-time").textContent = "";
+  activityStatus.textContent = "";
+  activityEvents.replaceChildren();
   if (previous) {
     void request("/auth/v1/logout?scope=local", {}, previous.access_token).catch(() => {});
   }
@@ -78,11 +96,17 @@ async function getData(activeSession) {
     before_id: cursor?.id ?? null,
   };
   async function load() {
-    return Promise.all([
+    const [metrics, log, visitors] = await Promise.all([
       rpc("btv_launch_metrics", {}, activeSession.access_token),
       rpc("btv_launch_timeline", timelineParameters, activeSession.access_token),
       rpc("btv_live_visitors", { alerts_after: alertsAfter }, activeSession.access_token),
     ]);
+    const engagement = await rpc("btv_read_view_activity", {
+      range_start: log.window_start,
+      range_end: log.window_end,
+      target_view_id: null,
+    }, activeSession.access_token);
+    return [metrics, log, visitors, engagement];
   }
 
   try {
@@ -140,12 +164,19 @@ function renderTimeline(log) {
       : "Unavailable";
     row.insertCell().textContent = event.device_type ?? "Unavailable";
     row.insertCell().textContent = event.masked_ip ?? "Unavailable";
+    const activity = document.createElement("button");
+    activity.className = "activity-button";
+    activity.type = "button";
+    activity.textContent = "View activity";
+    activity.setAttribute("aria-label", `View activity for ${time.textContent} IST`);
+    activity.addEventListener("click", () => void showActivity(event));
+    row.insertCell().append(activity);
     return row;
   });
   if (!rows.length) {
     const row = document.createElement("tr");
     const cell = row.insertCell();
-    cell.colSpan = 5;
+    cell.colSpan = 6;
     cell.textContent = "No views in this time range.";
     rows.push(row);
   }
@@ -153,6 +184,65 @@ function renderTimeline(log) {
   const from = preciseDate.format(new Date(log.window_start));
   const until = preciseDate.format(new Date(log.window_end));
   document.querySelector("#view-window").textContent = `${from} to ${until} IST · Page ${cursors.length + 1}`;
+}
+
+function visibleDuration(milliseconds) {
+  if (milliseconds === null) return "Unavailable";
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  return minutes ? `${minutes}m ${seconds % 60}s` : `${seconds}s`;
+}
+
+function renderEngagement(summary) {
+  document.querySelector("#tracked-views").textContent = number.format(summary.tracked_views);
+  document.querySelector("#activity-clicks").textContent = number.format(summary.total_clicks);
+  document.querySelector("#activity-duration").textContent = visibleDuration(summary.average_visible_ms);
+  document.querySelector("#activity-scroll").textContent = summary.average_scroll === null
+    ? "Unavailable" : `${summary.average_scroll}%`;
+  const rows = summary.targets.map((target) => {
+    const row = document.createElement("tr");
+    row.insertCell().textContent = actionLabels[target.action] ?? "Page action";
+    row.insertCell().textContent = number.format(target.clicks);
+    return row;
+  });
+  if (!rows.length) {
+    const row = document.createElement("tr");
+    const cell = row.insertCell();
+    cell.colSpan = 2;
+    cell.textContent = "No recorded clicks in this time range.";
+    rows.push(row);
+  }
+  document.querySelector("#click-targets").replaceChildren(...rows);
+}
+
+async function showActivity(event) {
+  const activeSession = session;
+  if (!activeSession || activityDialog.open) return;
+  const currentRequest = ++activityRequest;
+  document.querySelector("#activity-view-time").textContent = `Opened ${preciseDate.format(new Date(event.opened_at))} IST`;
+  activityStatus.textContent = "Loading activity…";
+  activityEvents.replaceChildren();
+  activityDialog.showModal();
+  try {
+    const detail = await rpc("btv_read_view_activity", {
+      range_start: null, range_end: null, target_view_id: event.id,
+    }, activeSession.access_token);
+    if (session !== activeSession || !activityDialog.open || currentRequest !== activityRequest) return;
+    activityStatus.textContent = detail
+      ? `Visible for ${visibleDuration(detail.visible_ms)} · Deepest scroll ${detail.scroll_percent}%`
+      : "Activity was unavailable for this view.";
+    if (!detail) return;
+    if (!detail.events.length) activityStatus.textContent += " · No recorded clicks or scroll milestones";
+    activityEvents.replaceChildren(...detail.events.map((step) => {
+      const item = document.createElement("li");
+      item.textContent = `${actionLabels[step.action] ?? "Page action"} · ${(step.offset_ms / 1000).toFixed(3)}s after open`;
+      return item;
+    }));
+  } catch {
+    if (session === activeSession && activityDialog.open && currentRequest === activityRequest) {
+      activityStatus.textContent = "Couldn’t load visit activity. Close and try again.";
+    }
+  }
 }
 
 function renderVisitors(visitors) {
@@ -218,11 +308,12 @@ async function refresh() {
   setBusy(true);
   const activeSession = session;
   try {
-    const [metrics, log, visitors] = await getData(activeSession);
+    const [metrics, log, visitors, engagement] = await getData(activeSession);
     if (session !== activeSession) return;
     renderMetrics(metrics);
     renderTimeline(log);
     renderVisitors(visitors);
+    renderEngagement(engagement);
     timeline = log;
     form.hidden = true;
     panel.hidden = false;

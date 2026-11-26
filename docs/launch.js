@@ -1,4 +1,5 @@
-import { configured, rpc } from "./supabase.js";
+import { configured, rpc } from "./supabase.js?v=5";
+import { trackPageActivity } from "./engagement.js";
 
 const source = new URLSearchParams(location.search).get("utm_source")?.toLowerCase() === "whatsapp"
   ? "whatsapp"
@@ -21,14 +22,16 @@ async function countView() {
   if (document.visibilityState !== "visible" || !globalThis.crypto?.randomUUID) return;
   document.removeEventListener("visibilitychange", countView);
   const args = { view_id: crypto.randomUUID(), campaign_source: source, browser_token: browserToken() };
+  const activityReady = trackPageActivity(args.view_id);
   try {
     await rpc("btv_record_browser_view", args);
   } catch {
     // A lost response may have arrived after the insert. Reuse its ID on retry.
-    if (document.visibilityState === "visible") {
-      await rpc("btv_record_browser_view", args).catch(() => {});
-    }
+    if (document.visibilityState !== "visible") return;
+    try { await rpc("btv_record_browser_view", args); }
+    catch { return; }
   }
+  activityReady();
 }
 
 if (configured) {

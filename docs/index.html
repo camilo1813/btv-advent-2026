@@ -15,33 +15,33 @@
   <meta property="og:image:alt" content="Beyond the Vote Advent Challenge 2026. The launch is on 29 November.">
   <title>Advent Challenge 2026 · Beyond the Vote</title>
   <link rel="stylesheet" href="./styles.css">
-  <script type="module" src="./launch.js?v=4"></script>
+  <script type="module" src="./launch.js?v=5"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-analytics="skip_content">Skip to content</a>
   <header class="top">
     <div class="wrap top-inner">
-      <a class="brand" href="./">Beyond the Vote</a>
+      <a class="brand" href="./" data-analytics="brand_home">Beyond the Vote</a>
       <nav aria-label="Main navigation">
-        <a href="#comic">Comic</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#sign-up">Sign up</a>
+        <a href="#comic" data-analytics="nav_comic">Comic</a>
+        <a href="#calendar" data-analytics="nav_calendar">Calendar</a>
+        <a href="#sign-up" data-analytics="nav_signup">Sign up</a>
       </nav>
     </div>
   </header>
   <main id="main">
-    <section class="hero" aria-labelledby="title">
+    <section class="hero" aria-labelledby="title" data-page-area="page_intro">
       <div class="wrap">
         <h1 id="title">Advent<br>Challenge <span>2026</span></h1>
         <p>Follow the comic, look closely at each scene, and return for five rounds of discovery. Launch day is <time datetime="2026-11-29">29 November 2026</time>.</p>
         <div class="actions">
-          <a class="button" href="#sign-up">Sign up for updates</a>
-          <a class="button button-outline" href="#calendar">See the calendar</a>
+          <a class="button" href="#sign-up" data-analytics="hero_signup">Sign up for updates</a>
+          <a class="button button-outline" href="#calendar" data-analytics="hero_calendar">See the calendar</a>
         </div>
       </div>
     </section>
     <div class="wrap content">
-      <section id="sign-up" class="signup" aria-labelledby="signup-title">
+      <section id="sign-up" class="signup" aria-labelledby="signup-title" data-page-area="page_signup">
         <h2 id="signup-title">Get Advent updates</h2>
         <p>Leave an email address for comic release and challenge updates. Competition entry opens separately.</p>
         <p id="signup-unavailable">Online sign-up will be available when registration opens.</p>
@@ -49,18 +49,18 @@
           <label for="signup-email">Email address</label>
           <div class="form-row">
             <input id="signup-email" name="email" type="email" autocomplete="email" maxlength="254" pattern=".+@.+[.].+" title="Use a full email address, such as name@example.com" required>
-            <button class="button button-dark" type="submit">Sign up</button>
+            <button class="button button-dark" type="submit" data-analytics="submit_signup">Sign up</button>
           </div>
           <p id="signup-privacy">Beyond the Vote will use this address for Advent Challenge updates. If you’re under 18, ask a parent or guardian to sign up with their own email address.</p>
         </form>
         <p id="signup-status" role="status"></p>
-        <a class="share" href="https://wa.me/?text=Join%20the%20Beyond%20the%20Vote%20Advent%20Challenge%202026%3A%20https%3A%2F%2Fcamilo1813.github.io%2Fbtv-advent-2026%2F%3Futm_source%3Dwhatsapp">Share on WhatsApp</a>
+        <a class="share" data-analytics="share_whatsapp" href="https://wa.me/?text=Join%20the%20Beyond%20the%20Vote%20Advent%20Challenge%202026%3A%20https%3A%2F%2Fcamilo1813.github.io%2Fbtv-advent-2026%2F%3Futm_source%3Dwhatsapp">Share on WhatsApp</a>
       </section>
-      <section id="comic" class="comic" aria-labelledby="comic-title">
+      <section id="comic" class="comic" aria-labelledby="comic-title" data-page-area="page_comic">
         <h2 id="comic-title">The comic</h2>
         <p>The opening episode will appear here when it’s released.</p>
       </section>
-      <section id="calendar" aria-labelledby="calendar-title">
+      <section id="calendar" aria-labelledby="calendar-title" data-page-area="page_calendar">
         <div class="calendar-heading">
           <h2 id="calendar-title">Round calendar</h2>
           <p>Round dates and links will be posted here.</p>
@@ -75,9 +75,9 @@
       </section>
     </div>
   </main>
-  <footer class="wrap footer">
+  <footer class="wrap footer" data-page-area="page_footer">
     <span>Beyond the Vote · Advent 2026</span>
-    <small>For traffic analytics, we record page-open times, campaign links, broad device categories, and approximate country or city. We store a masked IP prefix and use protected identifiers to count repeat connections and browsers. A random identifier stored in this browser enables repeat-browser counts. Sign-up emails are stored separately.</small>
+    <small>For traffic analytics, we record page opens, campaign links, time the page is visible, scroll depth, and clicks on labeled controls and page sections. We also record broad device categories, approximate location, and masked IP prefixes. A random browser identifier helps count repeat visits. The activity log does not capture form entries. Sign-up emails are stored separately.</small>
   </footer>
 </body>
 </html>

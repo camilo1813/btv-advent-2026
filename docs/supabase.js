@@ -9,7 +9,7 @@ export class SupabaseError extends Error {
   }
 }
 
-export async function request(path, body, accessToken) {
+export async function request(path, body, accessToken, { keepalive = false } = {}) {
   if (!configured) throw new Error("Supabase is not configured");
 
   const headers = {
@@ -22,6 +22,7 @@ export async function request(path, body, accessToken) {
     method: "POST",
     headers,
     body: JSON.stringify(body),
+    keepalive,
     signal: AbortSignal.timeout(12_000),
   });
   if (!response.ok) throw new SupabaseError(response.status);
@@ -29,6 +30,6 @@ export async function request(path, body, accessToken) {
   return response.json();
 }
 
-export function rpc(name, args, accessToken) {
-  return request(`/rest/v1/rpc/${name}`, args, accessToken);
+export function rpc(name, args, accessToken, options) {
+  return request(`/rest/v1/rpc/${name}`, args, accessToken, options);
 }
