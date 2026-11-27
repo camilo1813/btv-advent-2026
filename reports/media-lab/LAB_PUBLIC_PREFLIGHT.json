@@ -1,0 +1,312 @@
+{
+  "results": [
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 200,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/",
+      "redirected": false,
+      "content_type": "text/html",
+      "content_length": "5186",
+      "bytes": 5186,
+      "sha256": "c9e2ceaac372b57fa69631f732d13155fe9b60ee629e069c7766bab2ec2c53fa",
+      "open_graph_in_first_300kb": true,
+      "status": "PASS"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "agent": "BTV Media Lab Verification",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 200,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/",
+      "redirected": false,
+      "content_type": "text/html",
+      "content_length": "5186",
+      "bytes": 5186,
+      "sha256": "c9e2ceaac372b57fa69631f732d13155fe9b60ee629e069c7766bab2ec2c53fa",
+      "open_graph_in_first_300kb": true,
+      "status": "PASS"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "agent": "WhatsApp/2.22.20.72 A",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 200,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/",
+      "redirected": false,
+      "content_type": "text/html",
+      "content_length": "5186",
+      "bytes": 5186,
+      "sha256": "c9e2ceaac372b57fa69631f732d13155fe9b60ee629e069c7766bab2ec2c53fa",
+      "open_graph_in_first_300kb": true,
+      "status": "PASS"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "agent": "WhatsApp/2.22.19.78 I",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 200,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/",
+      "redirected": false,
+      "content_type": "text/html",
+      "content_length": "5186",
+      "bytes": 5186,
+      "sha256": "c9e2ceaac372b57fa69631f732d13155fe9b60ee629e069c7766bab2ec2c53fa",
+      "open_graph_in_first_300kb": true,
+      "status": "PASS"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a01/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/a06/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/b03/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/tests/v1/c02/",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/posters/a01.jpg",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/animations/loop.gif",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    },
+    {
+      "url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "agent": "WhatsApp/2.2236.3 N",
+      "http_status": 404,
+      "final_url": "https://camilo1813.github.io/btv-advent-2026/lab/assets/videos/diag-5s.mp4",
+      "error": "HTTP Error 404: Not Found",
+      "status": "FAIL"
+    }
+  ]
+}

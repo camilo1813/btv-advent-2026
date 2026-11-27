@@ -1,0 +1,39 @@
+{
+  "launchDate": "29 November 2026",
+  "characters": {
+    "storm": {
+      "name": "Storm",
+      "status": "awaiting-approved-assets",
+      "assets": [],
+      "actions": [
+        "idle",
+        "curious",
+        "pointing",
+        "surprised",
+        "celebrating"
+      ]
+    },
+    "borsche": {
+      "name": "Borsche the Bright Mind",
+      "status": "awaiting-approved-assets",
+      "assets": [],
+      "actions": [
+        "idle",
+        "thinking",
+        "explaining",
+        "pointing"
+      ]
+    },
+    "lazy": {
+      "name": "Lazy",
+      "status": "awaiting-approved-assets",
+      "assets": [],
+      "actions": [
+        "sleeping",
+        "stretching",
+        "walking",
+        "jumping"
+      ]
+    }
+  }
+}

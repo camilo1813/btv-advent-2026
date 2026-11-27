@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "core": 55,
+  "pages": 98,
+  "validated_assets": 54,
+  "sourceFiles": 126,
+  "publishedBytes": 10422328,
+  "totalAssetBytes": 9797067,
+  "blocked": [],
+  "outsideBaseline": [
+    [
+      "XB6",
+      610000
+    ],
+    [
+      "XB7",
+      1000000
+    ]
+  ],
+  "productionWorkspaceBaseline": {
+    "index.html": "c9e2ceaac372b57fa69631f732d13155fe9b60ee629e069c7766bab2ec2c53fa",
+    "styles.css": "a9a3fe29f878d22a3e09801f54e614266007f6644d9c20a414f65a51cf91fa49",
+    "supabase.js": "1887f46c17ae7bda819bc415ebdb69c17b538ba82ff318f04635b78250362db8",
+    "config.js": "a587618025181917f7d428c81693cf45c7fa2861a3c0a0cc04e6304545070933",
+    "engagement.js": "ae2357e85597c9e9f4664f235d567dd09b8472c5db25e7bb635d4835381e824d",
+    "launch.js": "e19c41128c8a82f974833763adc6a998813fc5eb45a66198fad29bd1ccbba32a",
+    "share-card.png": "b4a0287fc7402f9823d88d6dbd001e39594366c69d82951914cda447171594cd"
+  }
+}

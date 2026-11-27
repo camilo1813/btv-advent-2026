@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "type": "video",
+  "title": "BTV Media Lab",
+  "provider_name": "Beyond the Vote",
+  "provider_url": "https://camilo1813.github.io/btv-advent-2026/",
+  "width": 405,
+  "height": 720,
+  "html": "<iframe src=\"https://camilo1813.github.io/btv-advent-2026/lab/players/mp4/\" width=\"405\" height=\"720\" title=\"BTV video\"></iframe>"
+}
