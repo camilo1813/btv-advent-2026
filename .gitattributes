@@ -1,0 +1,8 @@
+/docs/lab/** text=auto eol=lf
+/tools/media-lab/** text=auto eol=lf
+/tests/media-lab/** text=auto eol=lf
+/reports/media-lab/** text=auto eol=lf
+/docs/lab/**/*.avif -text
+/docs/lab/**/*.webp -text
+/docs/lab/**/*.webm -text
+/docs/lab/**/*.mp4 -text

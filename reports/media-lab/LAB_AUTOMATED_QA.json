@@ -1,0 +1,173 @@
+{
+  "generated_at_unix": 1795780491.024139,
+  "results": [
+    {
+      "name": "Local HTTP status, bytes, MIME and SHA-256",
+      "status": "PASS",
+      "detail": 152
+    },
+    {
+      "name": "chromium dashboard and six viewport widths",
+      "status": "PASS",
+      "detail": {
+        "viewports": [
+          [
+            360,
+            640
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            414,
+            896
+          ],
+          [
+            430,
+            932
+          ],
+          [
+            768,
+            1024
+          ],
+          [
+            1440,
+            900
+          ]
+        ],
+        "cases": 98,
+        "version": "151.0.7922.34"
+      }
+    },
+    {
+      "name": "chromium video metadata and decode load",
+      "status": "PASS",
+      "detail": {
+        "source": "diag-5s.mp4",
+        "width": 720,
+        "height": 1280,
+        "duration": 5
+      }
+    },
+    {
+      "name": "firefox dashboard and six viewport widths",
+      "status": "PASS",
+      "detail": {
+        "viewports": [
+          [
+            360,
+            640
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            414,
+            896
+          ],
+          [
+            430,
+            932
+          ],
+          [
+            768,
+            1024
+          ],
+          [
+            1440,
+            900
+          ]
+        ],
+        "cases": 98,
+        "version": "153.0"
+      }
+    },
+    {
+      "name": "firefox video metadata and decode load",
+      "status": "PASS",
+      "detail": {
+        "source": "diag-5s.mp4",
+        "width": 720,
+        "height": 1280,
+        "duration": 5
+      }
+    },
+    {
+      "name": "webkit dashboard and six viewport widths",
+      "status": "PASS",
+      "detail": {
+        "viewports": [
+          [
+            360,
+            640
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            414,
+            896
+          ],
+          [
+            430,
+            932
+          ],
+          [
+            768,
+            1024
+          ],
+          [
+            1440,
+            900
+          ]
+        ],
+        "cases": 98,
+        "version": "26.5"
+      }
+    },
+    {
+      "name": "webkit video metadata and decode load",
+      "status": "PASS",
+      "detail": {
+        "source": "diag-5s.mp4",
+        "width": 405,
+        "height": 720,
+        "duration": 5
+      }
+    },
+    {
+      "name": "Production baseline and registration form smoke check",
+      "status": "PASS",
+      "detail": "Live and workspace screenshots at 390 and 1440 CSS pixels. Registration form presence checked."
+    },
+    {
+      "name": "Chromium dashboard interactions and observation round trip",
+      "status": "PASS",
+      "detail": "Filter, technical view, download, observation, JSON and CSV import/export, WhatsApp text URL and unsupported file share."
+    },
+    {
+      "name": "Chromium interactive story",
+      "status": "PASS",
+      "detail": "Keyboard, next, replay, pause, registration CTA and reduced-motion startup."
+    },
+    {
+      "name": "Chromium motion player fixtures",
+      "status": "PASS",
+      "detail": "CSS, SVG, Canvas, WebGL or explicit fallback, Lottie SVG renderer and character page."
+    },
+    {
+      "name": "Chromium video autoplay and loop diagnostics",
+      "status": "PASS",
+      "detail": "Muted autoplay, time-wrap detection, pause/replay and blocked unmuted attempt in fresh page."
+    },
+    {
+      "name": "Chromium native file-share API contract",
+      "status": "PASS",
+      "detail": "Stub validates file preparation before click, activation and distinct cancellation handling."
+    }
+  ],
+  "whatsapp_device_tests": "NOT_TESTED"
+}

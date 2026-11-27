@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="960" viewBox="0 0 540 960">
+    <defs><pattern id="grid" width="54" height="96" patternUnits="userSpaceOnUse"><path d="M0 96V0H54" fill="none" stroke="#332433"/></pattern></defs>
+    <rect width="540" height="960" fill="#261b29"/><rect width="540" height="960" fill="url(#grid)"/>
+    <g font-family="sans-serif" font-weight="bold" font-size="22" fill="#fff8ee">
+    <text x="54" y="153" fill="#ffcb8e">BEYOND THE VOTE</text><text x="54" y="307" font-size="40">Advent Challenge</text>
+    <text x="54" y="403" fill="#c7829e" font-size="35">2026</text>
+    <circle class="marker" cx="145" cy="566" r="27" fill="#ffcb8e"><animate attributeName="cx" values="145;290;145" dur="5s" repeatCount="indefinite"/></circle>
+    <text x="54" y="691">STORM / BORSCHE / LAZY</text><text x="54" y="810" opacity="1"><animate attributeName="opacity" values="1;0;0;0;0;1" calcMode="discrete" keyTimes="0;.2;.4;.6;.8;1" dur="5s" repeatCount="indefinite"/>F000 · 0.00s · LOOP</text><text x="54" y="810" opacity="0"><animate attributeName="opacity" values="0;1;0;0;0;0" calcMode="discrete" keyTimes="0;.2;.4;.6;.8;1" dur="5s" repeatCount="indefinite"/>F030 · 1.00s · LOOP</text><text x="54" y="810" opacity="0"><animate attributeName="opacity" values="0;0;1;0;0;0" calcMode="discrete" keyTimes="0;.2;.4;.6;.8;1" dur="5s" repeatCount="indefinite"/>F060 · 2.00s · LOOP</text><text x="54" y="810" opacity="0"><animate attributeName="opacity" values="0;0;0;1;0;0" calcMode="discrete" keyTimes="0;.2;.4;.6;.8;1" dur="5s" repeatCount="indefinite"/>F090 · 3.00s · LOOP</text><text x="54" y="810" opacity="0"><animate attributeName="opacity" values="0;0;0;0;1;0" calcMode="discrete" keyTimes="0;.2;.4;.6;.8;1" dur="5s" repeatCount="indefinite"/>F120 · 4.00s · LOOP</text>
+    <text x="54" y="874" fill="#ffcb8e">DIAGNOSTIC / SMIL</text></g></svg>
